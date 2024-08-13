@@ -10,7 +10,7 @@ void log_init(log_callback_t log)
 void log_message(int level, const char *fmt, ...)
 {
     char buffer[512];
-    int len = 0;
+    uint16_t len = 0;
 
     switch (level) {
         case LOG_DEBUG:
