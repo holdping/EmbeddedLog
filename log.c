@@ -9,12 +9,13 @@ void log_init(log_callback_t log)
 
 void log_message(int level, const char *fmt, ...)
 {
-    char buffer[256];
+    char buffer[512];
     int len = 0;
 
     switch (level) {
         case LOG_DEBUG:
             len += snprintf(buffer + len, sizeof(buffer) - len, "\033[32m[DEBUG] "); // ??
+            len += snprintf(buffer + len, sizeof(buffer) - len, "In File %s,Line %d",__FILE__,__LINE__); // ??
             break;
         case LOG_INFO:
             len += snprintf(buffer + len, sizeof(buffer) - len, "\033[32m[INFO] "); // ??
@@ -24,6 +25,7 @@ void log_message(int level, const char *fmt, ...)
             break;
         case LOG_ERROR:
             len += snprintf(buffer + len, sizeof(buffer) - len, "\033[31m[ERROR] "); // ??
+            len += snprintf(buffer + len, sizeof(buffer) - len, "In File %s,Line %d",__FILE__,__LINE__); // ??
             break;
         default:
             return;
@@ -40,6 +42,10 @@ void log_message(int level, const char *fmt, ...)
         buffer[len++] = '\n';
         len += snprintf(buffer + len, sizeof(buffer) - len, "\033[0m"); // ????
     }
-
-    log_print_callback((uint8_t*)buffer, len);
+    if (log_print_callback != NULL)
+    {
+        log_print_callback((uint8_t*)buffer, len);
+    }
+    
+    
 }
