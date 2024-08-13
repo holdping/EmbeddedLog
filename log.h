@@ -43,6 +43,16 @@ void log_init(log_callback_t log);
  ***********************************************************************************/
 void log_message(int level, const char *fmt, ...);
 
+/***********************************************************************************
+ * @brief      assert function 
+ * @param      expr     assert expression
+ * @date       2024-08-13
+ * @details    The Assert Function Is Used To Check If An Expression Is True. If
+ *              The Expression Is False, The Assert Function Will Output An Error
+ *              Message And Halt The Program Execution.
+ ***********************************************************************************/
+void __assert(const char *expr);
+
 #define log_debug(fmt, ...) log_message(LOG_DEBUG, fmt, ##__VA_ARGS__)
 #define log_info(fmt, ...) log_message(LOG_INFO, fmt, ##__VA_ARGS__)
 #define log_warn(fmt, ...) log_message(LOG_WARN, fmt, ##__VA_ARGS__)

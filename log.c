@@ -56,3 +56,6 @@ void log_message(int level, const char *fmt, ...)
     
 }
 
+void __assert(const char *expr) {
+    log_message(LOG_ERROR,"Assertion failed: %s, file %s, line %d\n", expr, __FILE__, __LINE__);
+}
